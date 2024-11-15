@@ -1,4 +1,5 @@
 from random import *
+from dotenv import load_dotenv
 import os
 import asyncio
 import logging
@@ -10,9 +11,13 @@ from aiogram.types import message_id
 from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 # Включаем логирование, чтобы не пропустить важные сообщения
 logging.basicConfig(level=logging.INFO)
+
+load_dotenv()
+
+
 # Объект бота
 bot = Bot(
-    token="123:abcxyz",
+    token= os.getenv('API_KEY'),
     default=DefaultBotProperties(
         parse_mode=ParseMode.HTML
     )
