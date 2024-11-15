@@ -36,12 +36,6 @@ def inputs(file_path, x):
             await nice.delete()
         except Exception as e:
             pass
-def ina(path, i, a):
-    @dp.callback_query(F.data == 'Geschiht')
-    async def gechichte(callback: types.CallbackQuery):
-        filename = os.path.splitext(os.path.basename(path))[0]
-        await callback.message.answer(f'Вот список всех презентаций:\n{filename}')
-        await callback.answer()
 
 
 @dp.message(Command("start"))
@@ -57,13 +51,16 @@ async def vibor(message: types.Message):
         callback_data="Obchaga")
     )
     sent_message = await message.answer(
-        "выберете предмет",
+        "<b>Введите /help для получения доп. информации.</b>\n\n"
+        "<b>Выберете предмет:</b>",
         reply_markup=builder.as_markup())
     await bot.pin_chat_message(chat_id=message.chat.id, message_id=sent_message.message_id)
 
+
 @dp.callback_query(F.data == 'Geschiht')
 async def gechichte(callback: types.CallbackQuery):
-    await callback.message.answer(f'1. Просвещение\n2. Политическая карта Европы '
+    await callback.message.answer(f'Выберите презентацию:\n'
+                                  f'1. Просвещение\n2. Политическая карта Европы '
                                 f'и мира в XVIII веке.pptx.Просвещение\n3. Новые идейно-политические течения и'
                                 f' традиции в XVIII веке\n4. Материальный и духовный мир человека XVIII века.pptx\n'
                                 f'5. Англия в XVIII веке.pptx.Просвещение\n6. Северная Америка в XVII веке\n'
@@ -77,10 +74,17 @@ async def gechichte(callback: types.CallbackQuery):
     for i in range(1, 12):
         builder.add(types.KeyboardButton(text=str(i)))
     builder.adjust(3)
-    await callback.message.answer(
-        "Вот все презентации!",
-        reply_markup=builder.as_markup(resize_keyboard=True))
     await callback.answer()
+
+
+@dp.message(Command('help'))
+async def helpcmd(message: types.Message):
+    await message.reply('Команды:\n'
+                        '/help - помощь\n'
+                        '/start - начало работы. После выбора предмета, у вас будет выведен список с презентацием, а '
+                        'также будут введены кнопки ниже ввода, которые соответсвуют списку, нажмите кнопку и будет '
+                        'выведена презентация и удалена через 20 минут.\n\n'
+                        'Если вы хотите вывести другие презентации нажмите на закреплённое сообщение.')
 
 
 inputs('Презентации/1.Просвещение.pptx', '1')
