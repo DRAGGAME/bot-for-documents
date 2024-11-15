@@ -116,7 +116,7 @@ async def gechichte(callback: types.CallbackQuery):
         f'1. Что делает человека человеком\n '
         f'2. В процессе\n'
         f'3. Общество как форма жизнедеятельности людей\n'
-        f'4. В процессе',
+        f'4. В процессе\n',
         reply_markup=builder.as_markup(resize_keyboard=True))
     inputs('Презентации/1. Что делает человека человеком.pptx', '1')
     inputs('Презентации/3. Общество как форма жизнедеятельности людей.pptx', '3')
