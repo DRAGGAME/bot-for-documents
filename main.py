@@ -91,6 +91,13 @@ async def gechichte(callback: types.CallbackQuery):
 @dp.callback_query(F.data == 'Obchaga')
 async def Obc(callback: types.CallbackQuery):
     global selected_subject
+    builder = ReplyKeyboardBuilder()
+    for i in range(1, 4):
+        if i == '2':
+            builder.add(types.KeyboardButton(text='Нет'))
+        else:
+            builder.add(types.KeyboardButton(text=str(i)))
+
     selected_subject = 'OB'
     await callback.message.answer('1. Что делает человека человеком\n'
                                     '2. Нет\n'
