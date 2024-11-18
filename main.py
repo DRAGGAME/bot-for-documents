@@ -107,9 +107,6 @@ async def Obc(callback: types.CallbackQuery):
         reply_markup=builder.as_markup(resize_keyboard=True))
 
     selected_subject = 'OB'
-    await callback.message.answer('1. Что делает человека человеком\n'
-                                    '2. Нет\n'
-                                    '3. Общество как форма жизнедеятельности людей\n')
     await callback.answer()
 
 @dp.message(F.text)
