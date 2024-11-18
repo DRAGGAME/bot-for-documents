@@ -93,10 +93,18 @@ async def Obc(callback: types.CallbackQuery):
     global selected_subject
     builder = ReplyKeyboardBuilder()
     for i in range(1, 4):
-        if i == '2':
-            builder.add(types.KeyboardButton(text='Нет'))
+        if i == 2:
+            builder.add(types.KeyboardButton(text='НЕТ'))
         else:
             builder.add(types.KeyboardButton(text=str(i)))
+    builder.adjust(2)
+    await callback.message.answer(
+        f'Выберите презентацию:\n'
+        f'1. Что делает человека человеком\n '
+        f'2. В процессе\n'
+        f'3. Общество как форма жизнедеятельности людей\n'
+        f'4. В процессе\n',
+        reply_markup=builder.as_markup(resize_keyboard=True))
 
     selected_subject = 'OB'
     await callback.message.answer('1. Что делает человека человеком\n'
