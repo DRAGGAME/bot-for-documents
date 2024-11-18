@@ -1,2 +1,1 @@
-# telegram_bot_school
-NiceBot
+Bot for school presentations
