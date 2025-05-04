@@ -1,1 +1,1 @@
-Bot for school presentations
+Bot for documents

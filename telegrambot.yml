@@ -1,4 +1,4 @@
-name: telegramBots
+name: tgBots-for-documents
 channels:
   - conda-forge
   - defaults
@@ -6,7 +6,12 @@ dependencies:
   - pip>=21.0.1
   - setuptools>=51.00.0
   - python>=3.10.0
+  - asyncpg
+  - unittest
   - pip:
+    - pytest-asyncio
+    - transliterate
+    - python-dotenv
     - aiogram==3.14.0
 
 prefix: c:/Users/schowm/anaconda3/envs/telegrams-env
