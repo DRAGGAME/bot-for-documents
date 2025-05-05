@@ -56,7 +56,7 @@ class PostgresBase:
         Documents_name TEXT,
         Documents_group TEXT,
         Documents_type TEXT,
-        Documents_id BYTEA
+        Documents_id TEXT
         );''')
 
     async def create_item_table(self):
