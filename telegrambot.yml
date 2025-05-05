@@ -7,7 +7,7 @@ dependencies:
   - setuptools>=51.00.0
   - python>=3.10.0
   - asyncpg
-  - unittest
+  - pytz
   - pip:
     - pytest-asyncio
     - transliterate

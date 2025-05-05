@@ -56,7 +56,7 @@ class PostgresBase:
         Documents_name TEXT,
         Documents_group TEXT,
         Documents_type TEXT,
-        Documents_byt BYTEA
+        Documents_id BYTEA
         );''')
 
     async def create_item_table(self):
@@ -70,7 +70,7 @@ if __name__ == '__main__':
     async def post():
         postes = PostgresBase()
         res = await postes.connect()
-        result_create_document = await postes.create_item_table()
+        result_create_document = await postes.create_user_documents_table()
         print(result_create_document)
         if not result_create_document:
             assert result_create_document is None
