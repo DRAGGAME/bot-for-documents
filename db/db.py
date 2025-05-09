@@ -3,6 +3,8 @@ import logging
 
 import asyncpg
 import os
+
+from aiogram.fsm.scene import After
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -54,6 +56,7 @@ class PostgresBase:
         User_id INT,
         User_name TEXT,
         Documents_name TEXT,
+        Documents_class TEXT,
         Documents_group TEXT,
         Documents_type TEXT,
         Documents_id TEXT
@@ -66,11 +69,25 @@ class PostgresBase:
         Item TEXT
         );''')
 
+    async def administration_table(self):
+        await self.execute_query('''CREATE TABLE IF NOT EXISTS administration_table
+        (
+        Id SERIAL PRIMARY KEY,
+        Login TEXT,
+        Password TEXT,
+        Login_for_admin BOOLEAN
+        );''')
+        await self.execute_query('''INSERT into administration_table (login, password, login_for_admin) 
+                                    VALUES ($1, $2, $3)''',
+                                 ('12345', '12345', False)
+                                 )
+
 if __name__ == '__main__':
     async def post():
         postes = PostgresBase()
         res = await postes.connect()
         result_create_document = await postes.create_user_documents_table()
+        await postes.administration_table()
         print(result_create_document)
         if not result_create_document:
             assert result_create_document is None
