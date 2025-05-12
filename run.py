@@ -1,5 +1,5 @@
 from aiogram.filters import CommandStart
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 import asyncio
 import logging
@@ -15,11 +15,8 @@ from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 # Включаем логирование, чтобы не пропустить важные сообщения
 logging.basicConfig(level=logging.INFO)
 
-load_dotenv()
-
-selected_subject = None
+# load_dotenv()
 # Объект
-operator = 0
 bot = Bot(
     token= os.getenv('TG_API'),
     default=DefaultBotProperties(
@@ -30,21 +27,15 @@ bot = Bot(
 dp = Dispatcher()
 dp.include_routers(userhandlers.router, adminshandlers.router)
 
-async def answer_documents(file_path, message: types.Message):
-        nice = await message.answer_document(
-            document=types.FSInputFile(path=file_path))
-        await bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
-        await asyncio.sleep(1200)
-        try:
-            await nice.delete()
-        except Exception as e:
-            pass
-
-
-
 # Запуск процесса поллинга новых апдейто
 async def main():
     try:
+        sqlbase_run = PostgresBase()
+        await sqlbase_run.connect()
+        await sqlbase_run.create_item_table()
+        await sqlbase_run.create_user_documents_table()
+        await sqlbase_run.administration_table()
+        await sqlbase_run.connect_close()
         await dp.start_polling(bot)
     finally:
         sqlbase_run = PostgresBase()
