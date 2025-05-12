@@ -179,7 +179,6 @@ async def deletes_files(callback: CallbackQuery, state: FSMContext):
     all_docs_db = await sqlbase_my_docx.execute_query('''SELECT id, data_time, user_id, user_name,
                                                     documents_name, documents_group, documents_type, documents_id FROM
                                                      user_documents WHERE user_id = $1''', (user_id, ))
-    counts -= 1
     if counts-1 < 0:
         forw = all_docs.get('forw')
         msg_id = all_docs.get('msg_id')
@@ -192,6 +191,9 @@ async def deletes_files(callback: CallbackQuery, state: FSMContext):
             scheduler.shutdown()
         await callback.message.answer('Все файлы удалены. Выберите действие', reply_markup=keyboard)
         return
+
+    counts -= 1
+
     await callback.message.edit_text(
         text=f'Выберете нужный вам файл:\n'
              f'Всего файлов: {len(all_docs_db)}\n'
