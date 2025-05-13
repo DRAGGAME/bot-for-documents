@@ -1,5 +1,5 @@
 from aiogram.filters import CommandStart
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 import os
 import asyncio
 import logging
@@ -8,14 +8,15 @@ from aiogram.filters.command import Command
 from aiogram.enums import ParseMode
 from aiogram.client.default import DefaultBotProperties
 from aiogram.types import Message, CallbackQuery, message_id
-from handlers_for_user import userhandlers
+from handlers_for_user import userhandlers, add_docx_user
 from handlers_for_admin import adminshandlers
 from db.db import PostgresBase
+
 from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 # Включаем логирование, чтобы не пропустить важные сообщения
 logging.basicConfig(level=logging.INFO)
 
-# load_dotenv()
+load_dotenv()
 # Объект
 bot = Bot(
     token= os.getenv('TG_API'),
@@ -25,7 +26,7 @@ bot = Bot(
 )
 # Диспетчер
 dp = Dispatcher()
-dp.include_routers(userhandlers.router, adminshandlers.router)
+dp.include_routers(userhandlers.router_search, adminshandlers.router, add_docx_user.router_add_docx)
 
 # Запуск процесса поллинга новых апдейто
 async def main():
@@ -42,6 +43,7 @@ async def main():
         await sqlbase_run.connect()
         await sqlbase_run.execute_query('''UPDATE administration_table SET login_for_admin = $1''', (False,))
         await sqlbase_run.connect_close()
+        await bot.session.close()
 
 if __name__ == "__main__":
     asyncio.run(main())

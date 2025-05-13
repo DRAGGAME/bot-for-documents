@@ -1,13 +1,14 @@
 import asyncio
 import logging
+import weakref
 
 import asyncpg
 import os
 
 from aiogram.fsm.scene import After
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
-# load_dotenv()
+load_dotenv()
 logging.basicConfig(level=logging.INFO)
 pg_host = os.getenv('ip')
 pg_user = os.getenv('user')
@@ -16,6 +17,8 @@ pg_database = os.getenv('DATABASE')
 api_tg = os.getenv('TG_API')
 
 class PostgresBase:
+
+    _instances = weakref.WeakSet()
 
     def __init__(self):
         """Инициализация начальных переменных"""
@@ -140,13 +143,19 @@ class PostgresBase:
     async def delete_report_subject(self, item: str) -> None:
         await self.execute_query('DELETE FROM item WHERE item = $1', [item])
 
+    @classmethod
+    async def close_all(cls):
+        for instance in list(cls._instances):  # делаем list, чтобы избежать ошибок изменения во время итерации
+            await instance.close()
 
 if __name__ == '__main__':
     async def post():
         postes = PostgresBase()
+
         res = await postes.connect()
         result_create_document = await postes.create_item_table()
         await postes.administration_table()
+        await PostgresBase.close_all()
         print(result_create_document)
         if not result_create_document:
             assert result_create_document is None
