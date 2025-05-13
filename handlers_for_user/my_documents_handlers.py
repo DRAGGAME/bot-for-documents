@@ -4,13 +4,13 @@ from aiogram import Router, F, Bot
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from handlers_for_user.sheduler_user.auto_close_connect import auto_close_connect
 from db.db import PostgresBase
 from handlers_for_user.kb.keyboard import KeyboardFactory
 
-load_dotenv()
-scheduler = AsyncIOScheduler()
+# load_dotenv()
+# scheduler = AsyncIOScheduler()
 
 kb_Factor_my_docx = KeyboardFactory()
 

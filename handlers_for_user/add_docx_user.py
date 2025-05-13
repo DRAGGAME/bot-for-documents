@@ -11,11 +11,11 @@ from aiogram.types import Message, ReplyKeyboardRemove
 from db.db_add_docx import DbForDocx
 from handlers_for_user.kb.keyboard import KeyboardFactory
 from pytz import timezone
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 bot = Bot(token=os.getenv('TG_API'), default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
-load_dotenv()
+# load_dotenv()
 router_add_docx = Router()
 sqlbase_user_add_docx = DbForDocx()
 kb_Factor_add = KeyboardFactory()

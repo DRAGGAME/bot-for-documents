@@ -6,7 +6,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 from aiogram.filters import Command, CommandStart
 from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from aiogram import Bot, Router, F #html
@@ -14,7 +14,7 @@ from db.db import PostgresBase
 from handlers_for_user import my_documents_handlers
 from handlers_for_user.kb.keyboard import KeyboardFactory
 
-load_dotenv()
+# load_dotenv()
 router_search = Router()
 sqlbase_user_search = PostgresBase()
 router_search.include_router(my_documents_handlers.router_my_docx)

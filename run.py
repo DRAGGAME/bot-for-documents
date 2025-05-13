@@ -1,5 +1,5 @@
 from aiogram.filters import CommandStart
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 import asyncio
 import logging
@@ -16,7 +16,7 @@ from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 # Включаем логирование, чтобы не пропустить важные сообщения
 logging.basicConfig(level=logging.INFO)
 
-load_dotenv()
+# load_dotenv()
 # Объект
 bot = Bot(
     token= os.getenv('TG_API'),

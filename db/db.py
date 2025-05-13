@@ -6,9 +6,9 @@ import asyncpg
 import os
 
 from aiogram.fsm.scene import After
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 logging.basicConfig(level=logging.INFO)
 pg_host = os.getenv('ip')
 pg_user = os.getenv('user')
