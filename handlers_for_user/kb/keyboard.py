@@ -1,5 +1,5 @@
 from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
-from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup
+from aiogram.types import InlineKeyboardButton, KeyboardButton, ReplyKeyboardMarkup
 
 
 class KeyboardFactory:
@@ -33,6 +33,7 @@ class KeyboardFactory:
         )
 
 
+
     async def create_builder_reply(self):
         self.builder_reply = ReplyKeyboardBuilder()
 
@@ -50,13 +51,33 @@ class KeyboardFactory:
                                              input_field_placeholder='Что вы хотите сделать?')
         return keyboard
 
+    async def builder_reply_report(self):
+        await self.create_builder_reply()
+        kb_start = [
+            [KeyboardButton(text="Добавить новый предмет"), KeyboardButton(text='Другая ошибка')],
+        ]
+        keyboard = ReplyKeyboardMarkup(keyboard=kb_start, resize_keyboard=True,
+                                             input_field_placeholder='Какую вы встретили ошибку?')
+        return keyboard
+
     async def builder_reply_class(self):
         await self.create_builder_reply()
         for num_keyboard in range(5, 12):
             self.builder_reply.add(KeyboardButton(text=str(num_keyboard)))
-            
+        self.builder_reply.row(KeyboardButton(text='Отмена'))
+
         keyboard = self.builder_reply.as_markup(resize_keyboard=True,
          input_field_placeholder='Выберите класс')
+        return keyboard
+
+    async def builder_reply_class_reports(self):
+        await self.create_builder_reply()
+        for num_keyboard in range(5, 12):
+            self.builder_reply.add(KeyboardButton(text=str(num_keyboard)))
+        self.builder_reply.row(KeyboardButton(text='Стоп'))
+
+        keyboard = self.builder_reply.as_markup(resize_keyboard=True,
+         input_field_placeholder='Выберите классы')
         return keyboard
 
     async def builder_reply_item(self, items_tuple: tuple):
@@ -66,7 +87,7 @@ class KeyboardFactory:
             item_list.append(item[0].lower())
             self.builder_reply.add(KeyboardButton(text=item[0]))
         self.builder_reply.adjust(2)
-        self.builder_reply.add.row(KeyboardButton(text='Отмена'))
+        self.builder_reply.row(KeyboardButton(text='Отмена'))
 
         keyboard = self.builder_reply.as_markup(resize_keyboard=True, input_field_placeholder='Выберите предмет')
         return keyboard, item_list
@@ -77,7 +98,6 @@ class KeyboardFactory:
         keyboard_cancel = self.builder_reply.as_markup(resize_keyboard=True,
                                                 input_field_placeholder='Нажмите кнопку в случае необходимости')
         return keyboard_cancel
-
 
     async def builder_inline_montage(self,
                                      next_boot: bool = False,
@@ -106,7 +126,7 @@ class KeyboardFactory:
 
         self.builder_inline.adjust(2, 1)
 
-        return self.builder_inline
+        return self.builder_inline.as_markup()
 
 
 

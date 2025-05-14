@@ -1,20 +1,15 @@
 import asyncio
 import logging
 import weakref
-
 import asyncpg
-import os
+from config import PG_HOST, PG_USER, PG_PASSWORD, PG_DATABASE
 
-from aiogram.fsm.scene import After
-# from dotenv import load_dotenv
-
-# load_dotenv()
 logging.basicConfig(level=logging.INFO)
-pg_host = os.getenv('ip')
-pg_user = os.getenv('user')
-pg_password = os.getenv('password')
-pg_database = os.getenv('DATABASE')
-api_tg = os.getenv('TG_API')
+
+pg_host = PG_HOST
+pg_user = PG_USER
+pg_password = PG_PASSWORD
+pg_database = PG_DATABASE
 
 class PostgresBase:
 

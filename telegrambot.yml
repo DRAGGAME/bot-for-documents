@@ -8,6 +8,7 @@ dependencies:
   - python>=3.10.0
   - asyncpg
   - apscheduler
+#  - python-dotenv
   - pytz
   - pip:
     - aiogram==3.14.0

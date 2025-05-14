@@ -1,32 +1,22 @@
-from aiogram.filters import CommandStart
-# from dotenv import load_dotenv
-import os
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher, types, F #html
-from aiogram.filters.command import Command
 from aiogram.enums import ParseMode
 from aiogram.client.default import DefaultBotProperties
-from aiogram.types import Message, CallbackQuery, message_id
-from handlers_for_user import userhandlers, add_docx_user
+
+from config import TG_API
+from handlers_for_user import userhandlers, add_docx_user, reports
 from handlers_for_admin import adminshandlers
 from db.db import PostgresBase
 
-from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 # Включаем логирование, чтобы не пропустить важные сообщения
 logging.basicConfig(level=logging.INFO)
+bot = Bot(token=TG_API, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
-# load_dotenv()
-# Объект
-bot = Bot(
-    token= os.getenv('TG_API'),
-    default=DefaultBotProperties(
-        parse_mode=ParseMode.HTML
-    )
-)
+#
 # Диспетчер
 dp = Dispatcher()
-dp.include_routers(userhandlers.router_search, adminshandlers.router, add_docx_user.router_add_docx)
+dp.include_routers(userhandlers.router_search, adminshandlers.router, add_docx_user.router_add_docx, reports.router_report)
 
 # Запуск процесса поллинга новых апдейто
 async def main():

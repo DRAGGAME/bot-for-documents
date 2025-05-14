@@ -1,26 +1,25 @@
 import os
-from datetime import datetime, timedelta
 from aiogram import Router, F, Bot
+from aiogram.client.default import DefaultBotProperties
+from aiogram.enums import ParseMode
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
-# from dotenv import load_dotenv
-from handlers_for_user.sheduler_user.auto_close_connect import auto_close_connect
+
+from config import TG_API
 from db.db import PostgresBase
 from handlers_for_user.kb.keyboard import KeyboardFactory
 
-# load_dotenv()
-# scheduler = AsyncIOScheduler()
-
 kb_Factor_my_docx = KeyboardFactory()
 
-bot = Bot(token=os.getenv('TG_API'), parce_mode='MARKDOWN')
+bot = Bot(token=TG_API, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+
 sqlbase_my_docx = PostgresBase()
 
 router_my_docx = Router()
 
 @router_my_docx.message(F.text.lower().contains('мои документы'))
 async def my_documents(message: Message, state: FSMContext):
+    await state.clear()
     await sqlbase_my_docx.connect()
 
     kb_inline_for_my_docx = await kb_Factor_my_docx.builder_inline_montage(
