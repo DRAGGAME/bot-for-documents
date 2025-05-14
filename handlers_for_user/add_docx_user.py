@@ -111,7 +111,6 @@ async def docx_name(message: Message, state: FSMContext):
 
         bots_answer = await bot.send_document(chat_id=os.getenv('id_chat'), document=docx_id)
         await bot.forward_message(chat_id=user_id, from_chat_id=os.getenv('id_chat'), message_id=bots_answer.message_id)
-        print(docx_info.get('docx_class'))
         await sqlbase_user_add_docx.insert_data(
                 times,
                 int(user_id),
