@@ -89,8 +89,8 @@ async def docs_item(message: Message, state: FSMContext):
 
 @router_add_docx.message(F, AddDocs.doc_id)
 async def docx_name(message: Message, state: FSMContext):
-    data_kb = await state.get_data()
-    keyboard_reply = data_kb.get('kb')
+    keyboard_reply = await kb_Factor_add.builder_reply_start()
+
     if message.document:
         moscow_tz = timezone("Europe/Moscow")
         times = datetime.now(moscow_tz).strftime('%Y-%m-%d %H:%M:%S')
