@@ -1,7 +1,7 @@
 import os
 
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
 TG_API = os.getenv('TG_API')
 PG_HOST = os.getenv('ip')
