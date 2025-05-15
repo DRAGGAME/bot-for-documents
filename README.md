@@ -1,5 +1,5 @@
 <h1 align="center">Bot for school files - version 2.0</h1>
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=+Share+Tech+&weight=200&size=24&duration=2650&pause=500&color=BCBCFF&vCenter=true&repeat=false&width=435&lines=New+features+of+the+bot%3F" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=+Share+Tech+&weight=200&size=24&duration=2650&pause=1500&color=BCBCFF&vCenter=true&repeat=false&width=435&lines=New+features+of+the+bot%3F" alt="Typing SVG" /></a>
 <ol>
   <li>Any user can:
     <ul>
@@ -18,4 +18,5 @@
     </ul>
   </li>
 </ol>
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=+Share+Tech+&weight=200&size=24&pause=1500&color=BCBCFF&multiline=true&width=435&height=70&lines=What+is+the+bot+created+for%3F;Short+description" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=+Share+Tech+&weight=200&size=24&duration=2650&pause=1500&color=BCBCFF&multiline=true&width=435&height=70&lines=What+is+the+bot+created+for%3F;Short+description" alt="Typing SVG" /></a>
+<p>The bot was created to share school documents/photos that would add</p>
