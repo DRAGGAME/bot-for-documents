@@ -18,3 +18,4 @@
     </ul>
   </li>
 </ol>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=+Share+Tech+&weight=200&size=24&pause=1500&color=BCBCFF&multiline=true&width=435&height=70&lines=What+is+the+bot+created+for%3F;Short+description" alt="Typing SVG" /></a>
