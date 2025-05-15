@@ -9,7 +9,6 @@
       <li>Send a bug fix request</li>
     </ul>
   </li>
-  <li></li>
   <li padding-top=20px>Admin options
     <ul>
       <li>Delete any file of any user</li>
