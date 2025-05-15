@@ -5,7 +5,7 @@ from aiogram.enums import ParseMode
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
 
-from config import TG_API
+from config import TG_API, tg_forw_docx
 from db.db import PostgresBase
 from handlers_for_user.kb.keyboard import KeyboardFactory
 
@@ -43,7 +43,7 @@ async def my_documents(message: Message, state: FSMContext):
                                       f'Название файла: {all_docs[count][4]}\n'
                                       f'Расширение: {all_docs[count][-2]}\n', reply_markup=kb_inline_for_my_docx)
 
-        forw = await bot.forward_message(chat_id=user_id, from_chat_id=os.getenv('id_chat'),
+        forw = await bot.forward_message(chat_id=user_id, from_chat_id=tg_forw_docx,
                                          message_id=int(all_docs[count][-1]))
         forw_chat = forw.chat.id
         forw_id = forw.message_id

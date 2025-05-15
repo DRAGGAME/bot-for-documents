@@ -9,7 +9,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.types import Message, ReplyKeyboardRemove
 
-from config import TG_API
+from config import TG_API, tg_forw_docx
 from db.db_add_docx import DbForDocx
 from handlers_for_user.kb.keyboard import KeyboardFactory
 from pytz import timezone
@@ -64,8 +64,8 @@ async def docx_class(message: Message, state: FSMContext):
 
         await state.update_data(docx_class=message.text.lower())
         await state.set_state(AddDocs.docx_group)
-        await message.answer('По какому предмету вы хотите добавить файлы?\n\nЕсли вашего предмета нет, '
-                             'то пришлите по команде /report данные', reply_markup=keyboard_reply)
+        await message.answer('По какому предмету вы хотите добавить файлы?\n\nЕсли нужного предмета нет, '
+                             'то введите команду /report_item', reply_markup=keyboard_reply)
 
 
 
@@ -109,8 +109,8 @@ async def docx_name(message: Message, state: FSMContext):
         user_id = message.chat.id
         user_name = message.from_user.username
 
-        bots_answer = await bot.send_document(chat_id=os.getenv('id_chat'), document=docx_id)
-        await bot.forward_message(chat_id=user_id, from_chat_id=os.getenv('id_chat'), message_id=bots_answer.message_id)
+        bots_answer = await bot.send_document(chat_id=tg_forw_docx, document=docx_id)
+        await bot.forward_message(chat_id=user_id, from_chat_id=tg_forw_docx, message_id=bots_answer.message_id)
         await sqlbase_user_add_docx.insert_data(
                 times,
                 int(user_id),
@@ -128,6 +128,7 @@ async def docx_name(message: Message, state: FSMContext):
         await message.answer('Документ успешно добавлен', reply_markup=keyboard_reply)
 
     elif message.photo:
+        await state.update_data(id_photo=message.photo[-1].file_id)
         await state.set_state(AddDocs.docx_type)
         await message.answer('Введите имя фото, чтобы все понимали, к чему он относится', reply_markup=ReplyKeyboardRemove())
 
@@ -147,8 +148,9 @@ async def edit_name_photo(message: Message, state: FSMContext):
         moscow_tz = timezone("Europe/Moscow")
         times = datetime.now(moscow_tz).strftime('%Y-%m-%d %H:%M:%S')
 
-        docx_id = data_kb.get('docx_id')
-        bots_answer = await bot.send_photo(chat_id=os.getenv('id_chat'), photo=docx_id)
+        docx_id = data_kb.get('id_photo')
+        print(docx_id)
+        bots_answer = await bot.send_photo(chat_id=tg_forw_docx, photo=docx_id)
 
         await sqlbase_user_add_docx.insert_data(
                 times,
