@@ -20,3 +20,9 @@
 </ol>
 <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=+Share+Tech+&weight=200&size=24&duration=2650&pause=1500&color=BCBCFF&multiline=true&width=435&height=70&lines=What+is+the+bot+created+for%3F;Short+description" alt="Typing SVG" /></a>
 <p>The bot was created to share school documents/photos that would add</p>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=+Share+Tech+&weight=200&size=24&pause=1500&color=BCBCFF&multiline=true&width=435&height=40&lines=How+do+I+install+a+bot%3F" alt="Typing SVG" /></a>
+<ol The technologies used to operate the bot>
+  <li>Postgresql. Attention, the bot only works on postgresql, if you want to rewrite it to another library, then change the db file.py located in the db folder, as well as the file db_add_docx.py.</li>
+  <li>Docker</li>
+  <li>The build is based on anaconda if you want to reduce the weight (1.3gb). Then install via pip</li>
+</ol>
