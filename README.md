@@ -9,7 +9,8 @@
       <li>Send a bug fix request</li>
     </ul>
   </li>
-  <li  Admin options::>
+  <li></li>
+  <li>Admin options
     <ul>
       <li>Delete any file of any user</li>
       <li>Confirm or reject bug claims</li>
