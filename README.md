@@ -10,7 +10,7 @@
     </ul>
   </li>
   <li></li>
-  <li>Admin options
+  <li padding-top=20px>Admin options
     <ul>
       <li>Delete any file of any user</li>
       <li>Confirm or reject bug claims</li>
