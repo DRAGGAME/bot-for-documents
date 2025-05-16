@@ -51,7 +51,7 @@ class PostgresBase:
         (
         Id SERIAL PRIMARY KEY,
         Data_time TEXT,
-        User_id INT,
+        User_id BIGINT,
         User_name TEXT,
         Documents_name TEXT,
         Documents_class TEXT,

@@ -247,6 +247,19 @@ async def deletes_files(callback: CallbackQuery, state: FSMContext):
     all_docs_db = await sqlbase_user_search.execute_query('''SELECT id, data_time, user_id, user_name,
                                                     documents_name, documents_group, documents_type, documents_id FROM
                                                      user_documents WHERE documents_group = $1''', (docx_group, ))
+    if counts-1 < 0:
+        forw = all_docx.get('forw')
+        msg_id = all_docx.get('msg_id')
+        await bot.delete_messages(chat_id=forw[1], message_ids=[msg_id, forw[0]])
+        keyboard = await kb_Factor_search.builder_reply_start()
+        await sqlbase_user_search.connect_close()
+        await state.clear()
+        await callback.answer()
+        # if scheduler.get_job(job_id=f'auto_close_{forw[0]}'):
+        #     scheduler.remove_job(job_id=f'auto_close_{forw[0]}')
+        #     scheduler.shutdown()
+        await callback.message.answer('Все файлы удалены. Выберите действие', reply_markup=keyboard)
+        return
     counts -= 1
 
     await callback.message.edit_text(
