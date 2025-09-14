@@ -1,16 +1,16 @@
-name: tgBots
-channels:
-  - conda-forge
-  - defaults
-dependencies:
-  - pip>=21.0.1
-  - setuptools>=51.00.0
-  - python>=3.10.0
-  - asyncpg
-  - apscheduler
-#  - python-dotenv
-  - pytz
-  - pip:
-    - aiogram==3.14.0
+  name: tgBots
+  channels:
+    - conda-forge
+    - defaults
+  dependencies:
+    - pip>=21.0.1
+    - setuptools>=51.00.0
+    - python>=3.10.0
+    - asyncpg
+    - apscheduler
+  #  - python-dotenv
+    - pytz
+    - pip:
+      - aiogram==3.14.0
 
-prefix: c:/Users/schowm/anaconda3/envs/telegrams-env
+  prefix: c:/Users/schowm/anaconda3/envs/telegrams-env

@@ -94,7 +94,7 @@ async def newlogs(message: Message, state: FSMContext):
     data = await state.get_data()
     altnewlog = data.get("altnewlog")  # Первый ввод логина
 
-    if altnewlog is None:  # Первый ввод нового логинае п
+    if altnewlog is None:  # Первый ввод нового логина
         if message.text.lower() == 'stop':
             await message.answer("Обновление логина прервано.")
             await sqlbase_admin_handlers.connect_close()

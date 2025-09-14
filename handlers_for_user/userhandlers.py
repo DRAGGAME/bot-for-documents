@@ -120,7 +120,7 @@ async def search_docs(message: Message, state: FSMContext):
     all_docs = await sqlbase_user_search.execute_query('''SELECT id, data_time, user_id, user_name,
                                                     documents_name, documents_group, documents_type, documents_id FROM
                                                      user_documents WHERE documents_group=$1 AND documents_class=$2''',
-                                                       (docx_group, docx_class))
+                                                           (docx_group, docx_class))
     if all_docs:
         user_id = message.chat.id
 
